@@ -1,0 +1,192 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --navy: #1e40af;
+  --navy-dark: #1e3a8a;
+  --gray: #f1f5f9;
+  --gray-light: #0d0d0e;
+  --gray-dark: #475569;
+  --white: #fff;
+  --black: #0f172a;
+  --accent: #3b82f6;
+  --accent-light: #dbeafe;
+  --radius: 16px;
+  --shadow: 0 10px 40px rgba(59, 130, 246, 0.15);
+  --timeline-dot: #3b82f6;
+  --timeline-dot-active: #1e40af;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-slate-50 text-gray-900 antialiased;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #f8fafc 0%, #e0e7ff 100%);
+    color: var(--black);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+  .gradient-bg {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+  }
+  
+  .card-hover {
+    @apply transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/30 hover:-translate-y-2;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+
+  .hero-glow {
+    color: #60a5fa;
+    text-shadow:
+      0 0 10px #60a5fa,
+      0 0 20px #60a5fa,
+      0 0 40px #60a5fa,
+      0 0 60px #3b82f6,
+      0 0 80px #3b82f6,
+      2px 2px 20px rgba(0,0,0,0.5);
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+}
+
+/* Animações */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeIn { 
+  from { opacity: 0; } 
+  to { opacity: 1; } 
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 0 4px var(--accent);
+  }
+  50% { 
+    transform: scale(1.1);
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.4);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-200;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-blue-500 rounded-full;
+  background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-blue-600;
+}
+
+/* Estilos específicos do Silva Jardim */
+.silva-jardim-nav {
+  width: 100%;
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  padding: 0.7rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.silva-jardim-hero {
+  min-height: 70vh;
+  background: 
+    radial-gradient(ellipse at top, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+    linear-gradient(rgba(30, 64, 175, 0.9), rgba(30, 58, 138, 0.8)), 
+    url('https://i.pinimg.com/originals/53/66/c6/5366c64bf6055638b97a128f8acb1837.jpg') center center/cover no-repeat;
+  color: var(--white);
+  text-align: center;
+  padding: 100px 20px 60px 20px;
+  border-radius: 0 0 var(--radius) var(--radius);
+  margin-bottom: 32px;
+  box-shadow: 0 20px 60px rgba(30, 64, 175, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-event {
+  position: relative;
+  margin-bottom: 38px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--radius);
+  padding: 20px 28px 20px 54px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+  border: 2px solid transparent;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.timeline-event:hover, .timeline-event.active {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border: 2px solid var(--accent);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+  transform: translateX(8px);
+}
+
+.timeline-event::before {
+  content: '';
+  position: absolute;
+  left: -28px;
+  top: 24px;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  border-radius: 50%;
+  border: 4px solid var(--white);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+.timeline-event:hover::before {
+  transform: scale(1.2);
+  animation: pulse-glow 2s infinite;
+}
+
+.timeline-event.active::before {
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.5);
+  transform: scale(1.15);
+}
